@@ -1,15 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv").config();
 
 const app = express();
 app.use(express.json());
 
 // ==== DB CONNECT ====
-const MONGODB_URL =
-  "mongodb+srv://uddipanbhatta7:V38gYZ4pNJjN7wLq@cluster0.gi6hewq.mongodb.net/crud";
-
 mongoose
-  .connect(MONGODB_URL, {
+  .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
