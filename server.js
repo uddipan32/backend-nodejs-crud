@@ -1,30 +1,30 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(express.json());
 
-app.post("/v1/product/add", async (req, res) => {
-  console.log(req.body);
-  res.json({ value: "Hello World!" });
-});
+// ==== DB CONNECT ====
+const MONGODB_URL =
+  "mongodb+srv://uddipanbhatta7:V38gYZ4pNJjN7wLq@cluster0.gi6hewq.mongodb.net/crud";
 
-app.put("/v1/product/update", async (req, res) => {
-  console.log(req.body);
-  res.json({ value: "Hello World!" });
-});
+mongoose
+  .connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  });
 
-app.get("/v1/product/list/:name/:age", async (req, res) => {
-  console.log(req.params);
-  res.json({ value: "Hello World!" });
-});
+// ==== MODELS ====
+require("./models/Product");
 
-app.get("/echo", (req, res) => {
-  res.json({ value: "Hello World!" });
-});
+// ==== ROUTES ====
+require("./routes/admin/productRoutes")(app);
+require("./routes/user/productRoutes")(app);
 
 app.listen(3000, (error) => {
   if (error) throw error;
   console.log("Server running on port 3000");
 });
-
-console.log("Hello World!");
