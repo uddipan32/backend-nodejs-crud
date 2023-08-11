@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 // ==== IMPORT MODELS ====
 const Product = mongoose.model("products");
 
+// ==== IMPORT MIDDLEWARE ====
+const { generateToken, isLoggedIn } = require("../../middleware/requireLogin");
+
 module.exports = (app) => {
   // ==========================
   // ==== GET ALL PRODUCTS ====

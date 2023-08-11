@@ -17,10 +17,15 @@ mongoose
 
 // ==== MODELS ====
 require("./models/Product");
+require("./models/User");
 
 // ==== ROUTES ====
+// ---- ADMIN ROUTES ----
 require("./routes/admin/productRoutes")(app);
+
+// ---- USER ROUTES ----
 require("./routes/user/productRoutes")(app);
+require("./routes/user/authRoutes")(app);
 
 app.listen(3000, (error) => {
   if (error) throw error;
